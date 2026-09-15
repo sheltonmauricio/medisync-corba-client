@@ -1,0 +1,8 @@
+services:
+  medisync-client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: medisync-corba-client
+    volumes:
+      - ./generated:/app/generated
