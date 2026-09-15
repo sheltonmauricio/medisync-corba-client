@@ -6,3 +6,5 @@ services:
     container_name: medisync-corba-client
     volumes:
       - ./generated:/app/generated
+    env_file:
+      - .env
