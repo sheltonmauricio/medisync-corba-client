@@ -1,5 +1,6 @@
 from corba_client import CorbaClient
 from services.patient_service import PatientService
+from services.queue_service import QueueService
 
 
 def main():
@@ -13,20 +14,33 @@ def main():
     print("Resposta do servidor:", hello_service.sayHello())
 
     patient_service = PatientService(client)
+    queue_service = QueueService(client)
 
-    patient = patient_service.register_patient(
-        "João Manuel",
-        "2000-05-10",
-        "Masculino",
-        "+258 84 000 0000",
+    patients = patient_service.list_patients()
+
+    print(f"\nPacientes registados: {len(patients)}")
+
+    for patient in patients:
+        print(f"- ID: {patient.id} | Nome: {patient.fullName}")
+
+    print("\nA adicionar pacientes à fila...")
+
+    queue_service.add_to_queue(1)
+    queue_service.add_to_queue(2)
+
+    print(
+        "Tamanho da fila:",
+        queue_service.get_queue_size(),
     )
 
-    print("Paciente registado:")
-    print(f"ID: {patient.id}")
-    print(f"Nome: {patient.fullName}")
-    print(f"Data de nascimento: {patient.birthDate}")
-    print(f"Género: {patient.gender}")
-    print(f"Telefone: {patient.phone}")
+    next_patient = queue_service.get_next_patient()
+
+    print("Próximo paciente:", next_patient)
+
+    print(
+        "Tamanho da fila após atendimento:",
+        queue_service.get_queue_size(),
+    )
 
     client.close()
 

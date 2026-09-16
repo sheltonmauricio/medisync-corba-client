@@ -78,5 +78,11 @@ class CorbaClient:
             Hospital.PatientService,
         )
 
+    def get_queue_service(self):
+        return self._resolve_service(
+            "QueueService",
+            Hospital.QueueService,
+        )
+
     def close(self):
         self.orb.destroy()
