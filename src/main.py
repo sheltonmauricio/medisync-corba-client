@@ -1,4 +1,5 @@
 from corba_client import CorbaClient
+from services.patient_service import PatientService
 
 
 def main():
@@ -11,9 +12,9 @@ def main():
     print("CORBA conectado com sucesso.")
     print("Resposta do servidor:", hello_service.sayHello())
 
-    patient_service = client.get_patient_service()
+    patient_service = PatientService(client)
 
-    patient = patient_service.registerPatient(
+    patient = patient_service.register_patient(
         "João Manuel",
         "2000-05-10",
         "Masculino",
