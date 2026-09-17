@@ -1,42 +1,36 @@
-from corba_client import CorbaClient
 from application.medisync_app import MediSyncApp
 
 
 def main():
     print("A ligar ao MediSync CORBA Server...")
 
-    client = CorbaClient()
+    app = MediSyncApp()
 
-    hello_service = client.get_hello_service()
+    try:
+        print("CORBA conectado com sucesso.")
 
-    print("CORBA conectado com sucesso.")
-    print("Resposta do servidor:", hello_service.sayHello())
+        patients = app.list_patients()
 
-    app = MediSyncApp(client)
+        print(f"\nPacientes registados: {len(patients)}")
 
-    patients = app.patient_service.list_patients()
+        for patient in patients:
+            print(
+                f"- ID: {patient.id} | "
+                f"Nome: {patient.fullName}"
+            )
 
-    print(f"\nPacientes registados: {len(patients)}")
+        print("\nTamanho actual da fila:")
+        print(app.get_queue_size())
 
-    for patient in patients:
+        appointments = app.list_appointments()
+
         print(
-            f"- ID: {patient.id} | "
-            f"Nome: {patient.fullName}"
+            "\nConsultas registadas:",
+            len(appointments),
         )
 
-    print(
-        "\nTamanho actual da fila:",
-        app.queue_service.get_queue_size(),
-    )
-
-    appointments = app.appointment_service.list_appointments()
-
-    print(
-        "Consultas registadas:",
-        len(appointments),
-    )
-
-    client.close()
+    finally:
+        app.close()
 
 
 if __name__ == "__main__":
