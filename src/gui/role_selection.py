@@ -71,7 +71,7 @@ class RoleSelection(QWidget):
     ) -> QFrame:
 
         card = QFrame()
-        card.setObjectName("card")
+        card.setObjectName("roleCard")
 
         layout = QVBoxLayout(card)
 
@@ -85,9 +85,11 @@ class RoleSelection(QWidget):
         layout.setSpacing(16)
 
         role_title = QLabel(title)
+        role_title.setObjectName("roleTitle")
         role_title.setAlignment(Qt.AlignCenter)
 
         role_description = QLabel(description)
+        role_description.setObjectName("roleDescription")
         role_description.setAlignment(Qt.AlignCenter)
         role_description.setWordWrap(True)
 

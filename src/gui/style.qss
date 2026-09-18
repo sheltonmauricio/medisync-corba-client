@@ -1,5 +1,5 @@
 QMainWindow {
-    background-color: #f8fafc;
+    background-color: #f1f5f9;
 }
 
 QWidget {
@@ -9,9 +9,9 @@ QWidget {
 }
 
 QLabel#title {
-    font-size: 32px;
+    font-size: 34px;
     font-weight: bold;
-    color: #0f172a;
+    color: #1e3a8a;
 }
 
 QLabel#subtitle {
@@ -19,10 +19,43 @@ QLabel#subtitle {
     color: #64748b;
 }
 
+QLabel#sectionTitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+QLabel#sectionSubtitle {
+    font-size: 14px;
+    color: #64748b;
+}
+
 QFrame#card {
-    background-color: white;
+    background-color: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
+}
+
+QFrame#roleCard {
+    background-color: #ffffff;
+    border: 1px solid #dbeafe;
+    border-radius: 18px;
+}
+
+QFrame#roleCard:hover {
+    border: 2px solid #3b82f6;
+    background-color: #f8fbff;
+}
+
+QLabel#roleTitle {
+    font-size: 21px;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+QLabel#roleDescription {
+    font-size: 14px;
+    color: #64748b;
 }
 
 QPushButton {
@@ -30,8 +63,8 @@ QPushButton {
     color: white;
     border: none;
     border-radius: 10px;
-    padding: 14px 24px;
-    font-size: 15px;
+    padding: 12px 22px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -41,4 +74,72 @@ QPushButton:hover {
 
 QPushButton:pressed {
     background-color: #1e40af;
+}
+
+QPushButton#secondaryButton {
+    background-color: #e2e8f0;
+    color: #334155;
+}
+
+QPushButton#secondaryButton:hover {
+    background-color: #cbd5e1;
+}
+
+QPushButton#successButton {
+    background-color: #16a34a;
+}
+
+QPushButton#successButton:hover {
+    background-color: #15803d;
+}
+
+QPushButton#dangerButton {
+    background-color: #dc2626;
+}
+
+QPushButton#dangerButton:hover {
+    background-color: #b91c1c;
+}
+
+QLineEdit,
+QComboBox,
+QDateEdit,
+QTableWidget {
+    background-color: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 9px;
+}
+
+QLineEdit:focus,
+QComboBox:focus,
+QDateEdit:focus {
+    border: 2px solid #3b82f6;
+}
+
+QTableWidget {
+    gridline-color: #e2e8f0;
+    padding: 0px;
+}
+
+QHeaderView::section {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+}
+
+QTableWidget::item {
+    padding: 8px;
+}
+
+QTableWidget::item:selected {
+    background-color: #dbeafe;
+    color: #1e3a8a;
+}
+
+QStatusBar {
+    background-color: #e2e8f0;
+    color: #475569;
 }
