@@ -8,3 +8,5 @@ services:
       - ./generated:/app/generated
     env_file:
       - .env
+    ports:
+      - "6080:6080"

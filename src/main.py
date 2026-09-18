@@ -1,36 +1,24 @@
+import sys
+
+from PySide6.QtWidgets import QApplication
+
 from application.medisync_app import MediSyncApp
+from gui.main_window import MainWindow
 
 
 def main():
-    print("A ligar ao MediSync CORBA Server...")
+    app = QApplication(sys.argv)
 
-    app = MediSyncApp()
+    medisync_app = MediSyncApp()
 
     try:
-        print("CORBA conectado com sucesso.")
+        window = MainWindow(medisync_app)
+        window.showMaximized()
 
-        patients = app.list_patients()
-
-        print(f"\nPacientes registados: {len(patients)}")
-
-        for patient in patients:
-            print(
-                f"- ID: {patient.id} | "
-                f"Nome: {patient.fullName}"
-            )
-
-        print("\nTamanho actual da fila:")
-        print(app.get_queue_size())
-
-        appointments = app.list_appointments()
-
-        print(
-            "\nConsultas registadas:",
-            len(appointments),
-        )
+        sys.exit(app.exec())
 
     finally:
-        app.close()
+        medisync_app.close()
 
 
 if __name__ == "__main__":

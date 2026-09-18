@@ -1,0 +1,44 @@
+QMainWindow {
+    background-color: #f8fafc;
+}
+
+QWidget {
+    font-family: "Arial";
+    font-size: 14px;
+    color: #0f172a;
+}
+
+QLabel#title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+QLabel#subtitle {
+    font-size: 16px;
+    color: #64748b;
+}
+
+QFrame#card {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+}
+
+QPushButton {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #1d4ed8;
+}
+
+QPushButton:pressed {
+    background-color: #1e40af;
+}
