@@ -7,10 +7,11 @@ from PySide6.QtWidgets import (
 
 
 class DoctorDashboard(QWidget):
-    def __init__(self, app):
+    def __init__(self, app, stack):
         super().__init__()
 
         self.app = app
+        self.stack = stack
 
         layout = QVBoxLayout(self)
 
@@ -33,4 +34,4 @@ class DoctorDashboard(QWidget):
         )
 
     def go_back(self):
-        self.parent().setCurrentIndex(0)
+        self.stack.setCurrentIndex(0)

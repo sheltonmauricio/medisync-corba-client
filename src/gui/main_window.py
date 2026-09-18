@@ -20,8 +20,16 @@ class MainWindow(QMainWindow):
         self.stack = QStackedWidget()
 
         self.role_selection = RoleSelection()
-        self.reception_dashboard = ReceptionDashboard(app)
-        self.doctor_dashboard = DoctorDashboard(app)
+
+        self.reception_dashboard = ReceptionDashboard(
+            app,
+            self.stack,
+        )
+
+        self.doctor_dashboard = DoctorDashboard(
+            app,
+            self.stack,
+        )
 
         self.stack.addWidget(
             self.role_selection
