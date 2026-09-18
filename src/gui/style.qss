@@ -62,9 +62,9 @@ QPushButton {
     background-color: #2563eb;
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 12px 22px;
-    font-size: 14px;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
     font-weight: bold;
 }
 
@@ -142,4 +142,20 @@ QTableWidget::item:selected {
 QStatusBar {
     background-color: #e2e8f0;
     color: #475569;
+}
+
+QLineEdit,
+QComboBox,
+QDateTimeEdit {
+    min-height: 32px;
+    padding: 5px 9px;
+    font-size: 13px;
+}
+
+QFormLayout {
+    spacing: 14px;
+}
+
+QLabel {
+    min-height: 20px;
 }
