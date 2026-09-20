@@ -14,6 +14,7 @@ from PySide6.QtWidgets import (
     QComboBox,
     QMessageBox,
     QFormLayout,
+    QStackedWidget,
 )
 
 
@@ -294,33 +295,114 @@ class ReceptionDashboard(QWidget):
             forms_layout
         )
 
-        # Cartão da lista
-        patients_card = QFrame()
-        patients_card.setObjectName("card")
+        # Área de dados
+        data_card = QFrame()
+        data_card.setObjectName("card")
 
-        patients_layout = QVBoxLayout(patients_card)
-        patients_layout.setContentsMargins(25, 25, 25, 25)
-        patients_layout.setSpacing(15)
+        data_layout = QVBoxLayout(data_card)
+
+        data_layout.setContentsMargins(
+            20,
+            18,
+            20,
+            18,
+        )
+
+        data_layout.setSpacing(10)
+
+        # Barra de navegação
+        navigation_layout = QHBoxLayout()
+
+        self.patients_button = QPushButton(
+            "Pacientes"
+        )
+
+        self.appointments_button = QPushButton(
+            "Consultas"
+        )
+
+        self.patients_button.clicked.connect(
+            lambda: self.show_data_page(0)
+        )
+
+        self.appointments_button.clicked.connect(
+            lambda: self.show_data_page(1)
+        )
+
+        navigation_layout.addWidget(
+            self.patients_button
+        )
+
+        navigation_layout.addWidget(
+            self.appointments_button
+        )
+
+        navigation_layout.addStretch()
+
+        data_layout.addLayout(
+            navigation_layout
+        )
+
+        # Conteúdo
+        self.data_stack = QStackedWidget()
+
+        # --------------------------------
+        # Página de pacientes
+        # --------------------------------
+
+        patients_page = QWidget()
+
+        patients_page_layout = QVBoxLayout(
+            patients_page
+        )
+
+        patients_page_layout.setContentsMargins(
+            0,
+            0,
+            0,
+            0,
+        )
 
         patients_header = QHBoxLayout()
 
-        patients_title = QLabel("Pacientes registados")
-        patients_title.setObjectName("sectionTitle")
+        patients_title = QLabel(
+            "Pacientes registados"
+        )
 
-        refresh_button = QPushButton("Actualizar")
-        refresh_button.setObjectName("secondaryButton")
-        refresh_button.clicked.connect(
+        patients_title.setObjectName(
+            "sectionTitle"
+        )
+
+        refresh_patients_button = QPushButton(
+            "Actualizar"
+        )
+
+        refresh_patients_button.setObjectName(
+            "secondaryButton"
+        )
+
+        refresh_patients_button.clicked.connect(
             self.load_patients
         )
 
-        patients_header.addWidget(patients_title)
-        patients_header.addStretch()
-        patients_header.addWidget(refresh_button)
+        patients_header.addWidget(
+            patients_title
+        )
 
-        patients_layout.addLayout(patients_header)
+        patients_header.addStretch()
+
+        patients_header.addWidget(
+            refresh_patients_button
+        )
+
+        patients_page_layout.addLayout(
+            patients_header
+        )
 
         self.patients_table = QTableWidget()
+
         self.patients_table.setColumnCount(5)
+
         self.patients_table.setHorizontalHeaderLabels(
             [
                 "ID",
@@ -343,16 +425,115 @@ class ReceptionDashboard(QWidget):
             True
         )
 
-        patients_layout.addWidget(
+        patients_page_layout.addWidget(
             self.patients_table
         )
 
-        main_layout.addWidget(
-            patients_card,
+        self.data_stack.addWidget(
+            patients_page
+        )
+
+        # --------------------------------
+        # Página de consultas
+        # --------------------------------
+
+        appointments_page = QWidget()
+
+        appointments_page_layout = QVBoxLayout(
+            appointments_page
+        )
+
+        appointments_page_layout.setContentsMargins(
+            0,
+            0,
+            0,
+            0,
+        )
+
+        appointments_header = QHBoxLayout()
+
+        appointments_title = QLabel(
+            "Consultas agendadas"
+        )
+
+        appointments_title.setObjectName(
+            "sectionTitle"
+        )
+
+        refresh_appointments_button = QPushButton(
+            "Actualizar"
+        )
+
+        refresh_appointments_button.setObjectName(
+            "secondaryButton"
+        )
+
+        refresh_appointments_button.clicked.connect(
+            self.load_appointments
+        )
+
+        appointments_header.addWidget(
+            appointments_title
+        )
+
+        appointments_header.addStretch()
+
+        appointments_header.addWidget(
+            refresh_appointments_button
+        )
+
+        appointments_page_layout.addLayout(
+            appointments_header
+        )
+
+        self.appointments_table = QTableWidget()
+
+        self.appointments_table.setColumnCount(5)
+
+        self.appointments_table.setHorizontalHeaderLabels(
+            [
+                "ID",
+                "Paciente",
+                "Médico",
+                "Data e hora",
+                "Especialidade",
+            ]
+        )
+
+        self.appointments_table.setEditTriggers(
+            QTableWidget.NoEditTriggers
+        )
+
+        self.appointments_table.setSelectionBehavior(
+            QTableWidget.SelectRows
+        )
+
+        self.appointments_table.horizontalHeader().setStretchLastSection(
+            True
+        )
+
+        appointments_page_layout.addWidget(
+            self.appointments_table
+        )
+
+        self.data_stack.addWidget(
+            appointments_page
+        )
+
+        data_layout.addWidget(
+            self.data_stack,
             1,
         )
 
+        main_layout.addWidget(
+            data_card,
+            1,
+        )
+
+        self.show_data_page(0)
+
         self.load_patients()
+        self.load_appointments()
 
     def register_patient(self):
         full_name = self.full_name_input.text().strip()
@@ -488,6 +669,83 @@ class ReceptionDashboard(QWidget):
                     f"{error}"
                 )
             )
+
+    def load_appointments(self):
+        try:
+            appointments = self.app.list_appointments()
+
+            self.appointments_table.setRowCount(
+                len(appointments)
+            )
+
+            for row, appointment in enumerate(
+                appointments
+            ):
+                values = [
+                    appointment.id,
+                    appointment.patientId,
+                    appointment.doctor,
+                    appointment.appointmentDate,
+                    appointment.specialty,
+                ]
+
+                for column, value in enumerate(values):
+                    item = QTableWidgetItem(
+                        str(value)
+                    )
+
+                    self.appointments_table.setItem(
+                        row,
+                        column,
+                        item,
+                    )
+
+            self.appointments_table.resizeColumnsToContents()
+
+        except Exception as error:
+            self.show_error(
+                (
+                    "Não foi possível carregar as consultas:\n"
+                    f"{error}"
+                )
+            )
+
+    def show_data_page(self, index: int):
+        self.data_stack.setCurrentIndex(index)
+
+        if index == 0:
+            self.patients_button.setObjectName(
+                "activeButton"
+            )
+
+            self.appointments_button.setObjectName(
+                "secondaryButton"
+            )
+
+        else:
+            self.patients_button.setObjectName(
+                "secondaryButton"
+            )
+
+            self.appointments_button.setObjectName(
+                "activeButton"
+            )
+
+        self.patients_button.style().unpolish(
+            self.patients_button
+        )
+
+        self.patients_button.style().polish(
+            self.patients_button
+        )
+
+        self.appointments_button.style().unpolish(
+            self.appointments_button
+        )
+
+        self.appointments_button.style().polish(
+            self.appointments_button
+        )
 
 
     def clear_appointment_form(self):

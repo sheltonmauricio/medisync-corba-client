@@ -159,3 +159,12 @@ QFormLayout {
 QLabel {
     min-height: 20px;
 }
+
+QPushButton#activeButton {
+    background-color: #2563eb;
+    color: white;
+}
+
+QPushButton#activeButton:hover {
+    background-color: #1d4ed8;
+}
