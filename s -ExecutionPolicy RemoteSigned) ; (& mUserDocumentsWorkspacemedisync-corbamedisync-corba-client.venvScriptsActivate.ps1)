@@ -1,0 +1,107 @@
+[33mcommit 2f11c5707e1105b8ead96f978e93d909f3079687[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Mon Sep 28 00:19:13 2026 +0200
+
+    feat(client): add role-based login interface
+
+[33mcommit c0f3aadca40bf86643448cf1d62386e1f4f806de[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Sun Sep 27 23:09:45 2026 +0200
+
+    feat(client): integrate authentication service
+
+[33mcommit 3e9a3e16f3d048486d313d1fb746a9d966f8c357[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Fri Sep 25 00:27:48 2026 +0200
+
+    fix(client): prevent queue refresh from removing patients
+
+[33mcommit e58f33d767abfdfbce1292baca90ee3d363d34b1[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Thu Sep 24 22:54:05 2026 +0200
+
+    feat(client): add patients to queue
+
+[33mcommit 63e940e5f0e820e4a78f1e7ee1162c6997981e03[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Sun Sep 20 21:18:46 2026 +0200
+
+    feat(client): complete reception dashboard
+
+[33mcommit 3373ef4f5a17e27495ae4ea64e74257cf5b177be[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Fri Sep 18 22:11:51 2026 +0200
+
+    feat(client): add patient registration and appointment scheduling
+
+[33mcommit 1689f6389e23e9425a74c478107e870e872c343c[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Fri Sep 18 21:42:19 2026 +0200
+
+    feat(client): add patient registration form
+
+[33mcommit a5a6742b19ae8f92a33c1319c4da994f61498cff[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Fri Sep 18 20:52:13 2026 +0200
+
+    feat(client): improve GUI styling
+
+[33mcommit c9968ed1999b5172ef0c4cbcfcdc9084c3071134[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Fri Sep 18 13:23:16 2026 +0200
+
+    feat(client): display patients in reception dashboard
+
+[33mcommit fc43cf6a37e61f3a044546f8278f00ca4e0393c9[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Fri Sep 18 12:30:54 2026 +0200
+
+    feat(client): add role-based dashboard navigation
+
+[33mcommit cd4e2079b664b837a9b021e7954106c14fad5640[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Fri Sep 18 00:24:23 2026 +0200
+
+    refactor(client): add application service layer
+
+[33mcommit e314f4f98b9427ccef25351e7170550f916465ad[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Wed Sep 16 14:32:49 2026 +0200
+
+    refactor(client): add application layer
+
+[33mcommit 307d64da9707551f269564ddbc35f6ceb6684ab4[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Wed Sep 16 14:28:43 2026 +0200
+
+    feat(client): integrate AppointmentService
+
+[33mcommit 89d8aec9969445a7adfca97575b410dccb0cb30e[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Wed Sep 16 14:26:06 2026 +0200
+
+    feat(client): integrate QueueService
+
+[33mcommit 67a3e219635f4ac7d0f370c202004864dd32ca80[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Wed Sep 16 14:04:13 2026 +0200
+
+    refactor(client): use PatientService abstraction
+
+[33mcommit 01608fbc4d551574f3b461292b71e895933aaed9[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Wed Sep 16 13:42:04 2026 +0200
+
+    feat(client): integrate PatientService
+
+[33mcommit 27148fb0aa9a462a23df8c78922ea1797fff6cf0[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Wed Sep 16 00:58:40 2026 +0200
+
+    feat(client): configure CORBA connection
+
+[33mcommit 575fa81ea733f64eacb1fe6b9323757b9f45304b[m
+Author: Shelton Maurício <shelton.mauricio.m@gmail.com>
+Date:   Tue Sep 15 14:58:13 2026 +0200
+
+    feat(client): initialize CORBA Python client
