@@ -1,24 +1,15 @@
 import sys
-from pathlib import Path
-
-
 from PySide6.QtWidgets import QApplication
 
 from application.medisync_app import MediSyncApp
 from gui.main_window import MainWindow
+from gui.theme import apply_theme
 
 
 def main():
     app = QApplication(sys.argv)
 
-    style_path = (
-        Path(__file__).resolve().parent
-        / "gui"
-        / "style.qss"
-    )
-
-    with open(style_path, "r", encoding="utf-8") as file:
-        app.setStyleSheet(file.read())
+    apply_theme(app, dark=False)
 
     medisync_app = MediSyncApp()
 
