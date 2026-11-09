@@ -6,6 +6,7 @@ from PySide6.QtWidgets import (
 from gui.login_page import LoginPage
 from gui.reception_dashboard import ReceptionDashboard
 from gui.doctor_dashboard import DoctorDashboard
+from gui.admin_dashboard import AdminDashboard
 
 
 class MainWindow(QMainWindow):
@@ -26,12 +27,15 @@ class MainWindow(QMainWindow):
         self.reception_dashboard = ReceptionDashboard(
             app,
             self.stack,
+            self.logout,
         )
 
         self.doctor_dashboard = DoctorDashboard(
             app,
             self.stack,
+            self.logout,
         )
+        self.admin_dashboard = AdminDashboard(app, self.logout)
 
         self.stack.addWidget(
             self.login_page
@@ -44,6 +48,7 @@ class MainWindow(QMainWindow):
         self.stack.addWidget(
             self.doctor_dashboard
         )
+        self.stack.addWidget(self.admin_dashboard)
 
         self.login_page.login_successful.connect(
             self.handle_login
@@ -54,11 +59,32 @@ class MainWindow(QMainWindow):
     def handle_login(self, user):
 
         if user.role == "RECEPTION":
+            self.reception_dashboard.set_current_user(user)
+            self.reception_dashboard.load_patients()
+            self.reception_dashboard.load_appointments()
+            self.reception_dashboard.load_directory()
+            self.reception_dashboard.show_page(0)
             self.stack.setCurrentWidget(
                 self.reception_dashboard
             )
 
         elif user.role == "DOCTOR":
+            self.doctor_dashboard.set_current_user(user)
             self.stack.setCurrentWidget(
                 self.doctor_dashboard
             )
+
+        elif user.role == "ADMIN":
+            self.admin_dashboard.set_current_user(user)
+            self.stack.setCurrentWidget(self.admin_dashboard)
+
+    def logout(self):
+        """Termina a sessão e volta ao ecrã de login."""
+        try:
+            self.app.logout()
+        except Exception:
+            pass
+
+        self.login_page.reset_form()
+        self.stack.setCurrentWidget(self.login_page)
+        self.login_page.username_input.setFocus()

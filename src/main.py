@@ -1,26 +1,31 @@
 import sys
-from pathlib import Path
-
-
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QMessageBox
 
 from application.medisync_app import MediSyncApp
 from gui.main_window import MainWindow
+from gui.theme import apply_theme
 
 
 def main():
     app = QApplication(sys.argv)
 
-    style_path = (
-        Path(__file__).resolve().parent
-        / "gui"
-        / "style.qss"
-    )
+    apply_theme(app, dark=False)
 
-    with open(style_path, "r", encoding="utf-8") as file:
-        app.setStyleSheet(file.read())
-
-    medisync_app = MediSyncApp()
+    while True:
+        try:
+            medisync_app = MediSyncApp()
+            break
+        except Exception as error:
+            retry = QMessageBox.critical(
+                None,
+                "Ligacao ao servidor MediSync",
+                f"Nao foi possivel iniciar a ligacao CORBA.\n\n{error}\n\n"
+                "Corrija a ligacao ao servidor e escolha Tentar novamente.",
+                QMessageBox.Retry | QMessageBox.Cancel,
+                QMessageBox.Retry,
+            )
+            if retry != QMessageBox.Retry:
+                return
 
     try:
         window = MainWindow(medisync_app)
